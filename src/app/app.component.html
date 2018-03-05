@@ -1,11 +1,13 @@
-<a [routerLink]="['signIn']">Log in</a> &nbsp;&nbsp;&nbsp;&nbsp;
-<a [routerLink]="['signUp']">Register</a> &nbsp;&nbsp;&nbsp;&nbsp;
-<ng-template [ngIf]="userAuthService.isAuthenticated()">
-    <a [routerLink]="['profile']">My profile</a> &nbsp;&nbsp;&nbsp;&nbsp;
-    <a (click)="logOut()">Log out</a>
-</ng-template>
+<div class="container-fluid">
+    <a [routerLink]="['signIn']">Log in</a> &nbsp;&nbsp;&nbsp;&nbsp;
+    <a [routerLink]="['signUp']">Register</a> &nbsp;&nbsp;&nbsp;&nbsp;
+    <ng-template [ngIf]="isAuth">
+        <a [routerLink]="['profile']">My profile</a> &nbsp;&nbsp;&nbsp;&nbsp;
+        <a (click)="logOut()">Log out</a>
+    </ng-template>
 
-&nbsp;&nbsp;&nbsp;&nbsp;is authenticated? {{userAuthService.isAuthenticated()}}
-<br><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;is authenticated? {{ isAuth }}
+    <br><br>
 
-<router-outlet></router-outlet>
+    <router-outlet></router-outlet>
+</div>

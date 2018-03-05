@@ -19,6 +19,8 @@ import { AppComponent } from './app.component';
 import { SignupComponent } from './components/authorisation/signup/signup.component';
 import { SigninComponent } from './components/authorisation/signin/signin.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { PageMenuComponent } from './components/page-menu/page-menu.component';
+import { UserWallComponent } from './components/user-wall/user-wall.component';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     AppComponent,
     SignupComponent,
     SigninComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    PageMenuComponent,
+    UserWallComponent
   ],
   imports: [
     BrowserModule,

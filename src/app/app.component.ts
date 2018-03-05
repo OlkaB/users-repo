@@ -9,6 +9,8 @@ import { UserAuthService } from './services/user-auth.service';
 })
 export class AppComponent implements OnInit {
 
+  isAuth;
+
   constructor(
     private userAuthService: UserAuthService
   ) {}
@@ -17,6 +19,10 @@ export class AppComponent implements OnInit {
     firebase.initializeApp({
       apiKey: 'AIzaSyC4NvknqGNOWILJIQNhSbZV5t6gbB7psRg',
       authDomain: 'testing-e5b72.firebaseapp.com'
+    });
+    this.userAuthService.getCurrentSignIn();
+    this.userAuthService.userToken.subscribe((token) => {
+      this.isAuth = token !== null && token !== undefined;
     });
   }
 

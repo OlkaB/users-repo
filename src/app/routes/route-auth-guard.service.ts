@@ -6,11 +6,15 @@ import { UserAuthService } from '../services/user-auth.service';
 export class RouteAuthGuardService implements CanActivate {
 
   constructor(
-    private authService: UserAuthService
+    private userAuthService: UserAuthService
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    return this.authService.isAuthenticated();
+    let auth;
+    this.userAuthService.userToken.subscribe((token) => {
+      auth = token !== null && token !== undefined;
+    });
+    return auth;
   }
 
 }
