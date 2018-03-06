@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RoutingModule } from './routes/routing.module';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 /*
 * SERVICES
@@ -35,6 +36,7 @@ import { UserWallComponent } from './components/user-wall/user-wall.component';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     RoutingModule,
     HttpModule,
     HttpClientModule

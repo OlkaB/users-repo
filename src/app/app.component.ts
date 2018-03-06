@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as firebase from 'firebase';
 import { UserAuthService } from './services/user-auth.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
 
   isAuth;
+  subscription: Subscription;
 
   constructor(
     private userAuthService: UserAuthService
@@ -21,13 +23,17 @@ export class AppComponent implements OnInit {
       authDomain: 'testing-e5b72.firebaseapp.com'
     });
     this.userAuthService.getCurrentSignIn();
-    this.userAuthService.userToken.subscribe((token) => {
+    this.subscription = this.userAuthService.userToken.subscribe((token) => {
       this.isAuth = token !== null && token !== undefined;
     });
   }
 
   logOut() {
     this.userAuthService.logOut();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

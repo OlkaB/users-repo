@@ -3,6 +3,7 @@
     <a [routerLink]="['signUp']">Register</a> &nbsp;&nbsp;&nbsp;&nbsp;
     <ng-template [ngIf]="isAuth">
         <a [routerLink]="['profile']">My profile</a> &nbsp;&nbsp;&nbsp;&nbsp;
+        <a [routerLink]="['wall']">My wall</a> &nbsp;&nbsp;&nbsp;&nbsp;
         <a (click)="logOut()">Log out</a>
     </ng-template>
 

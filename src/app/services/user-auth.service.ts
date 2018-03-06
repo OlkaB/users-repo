@@ -8,6 +8,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 export class UserAuthService {
 
   userToken = new BehaviorSubject(null);
+  userId = new BehaviorSubject(null); // user email is used as userId
 
   constructor(
     private router: Router
@@ -18,6 +19,7 @@ export class UserAuthService {
       firebase.auth().createUserWithEmailAndPassword(email, password).then(response => {
             console.log('SignUp response: ', response);
             this.getToken();
+            this.getUserEmail();
             this.router.navigate(['/profile']);
           });
     }).catch(
@@ -30,6 +32,7 @@ export class UserAuthService {
       firebase.auth().signInWithEmailAndPassword(email, password).then(response => {
           console.log('SignIn response: ', response);
             this.getToken();
+            this.getUserEmail();
             this.router.navigate(['/wall']);
           });
     }).catch(
@@ -39,25 +42,44 @@ export class UserAuthService {
 
   logOut() {
     firebase.auth().signOut();
-    this.userToken = null;
+    this.userToken.next(null);
+    this.userId.next(null);
     this.router.navigate(['/signIn']);
   }
 
   /* get firebase auth token for logged user */
   getToken() {
     const userTokenToOverWrite = this.userToken;
-    return firebase.auth().currentUser.getIdToken().then((token: string) => {
+    firebase.auth().currentUser.getIdToken().then((token: string) => {
       userTokenToOverWrite.next(token);
-    });
+    }).catch(
+      error => console.log('Couldn\'t retrieve user token. ', error)
+    );
+  }
+
+  getUserEmail() {
+    const userIdToSave = this.userId;
+    const user = firebase.auth();
+
+    if (user && user['email']) {
+      const userMail = user['email'].replace(/\./g, '--').replace('@', '---');
+      userIdToSave.next(userMail);
+    }
   }
 
   getCurrentSignIn() {
     const userTokenToOverWrite = this.userToken;
+    const userIdToSave = this.userId;
+
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        firebase.auth().currentUser.getIdToken().then(token => {
+        /* store user id = user email */
+        userIdToSave.next(user['email'].replace(/\./g, '--').replace('@', '---'));
+        /* store user firebase auth token */
+        firebase.auth().currentUser.getIdToken().then((token: string) => {
           userTokenToOverWrite.next(token);
         });
+        console.log('getCurrentSignIn _ user Data: ', user);
       } else {
         console.log('getCurrentSignIn: No user is signed in.');
       }

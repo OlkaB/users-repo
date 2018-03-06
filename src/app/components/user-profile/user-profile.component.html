@@ -1,1 +1,30 @@
-<h1>Hello user</h1>
+<div class="wrapper">
+    <div class="row">
+        <div class="col-xs-12 col-md-5 infoPane text-center">
+            <img class="avatar" src="http://takeaseathome.com/media/images/avatar-placeholder.png" alt="">
+            <h1>Let's get you set up</h1>
+            <p>It'll only take you a couple of minutes to fill in your profile</p>
+        </div>
+        <div class="col-xs-12 col-md-7 profilePane">
+            <form [formGroup]="profileForm" (ngSubmit)="submitProfileData()">
+                <div class="form-group">
+                    <label for="firstName">first name</label>
+                    <input class="form-control" type="text" autocomplete='given-name' id="firstName" formControlName="firstName" />
+                </div>
+                <div class="form-group">
+                    <label for="lastName">last name</label>
+                    <input class="form-control" type="text" autocomplete='family-name' id="lastName" formControlName="lastName" />
+                </div>
+                <div class="form-group">
+                    <label for="phoneNum">phone number</label>
+                    <input class="form-control" type="tel" autocomplete='tel-national' id="phoneNum" formControlName="phoneNum" />
+                </div>
+                <div class="form-group">
+                    <label for="birthDate">birth date</label>
+                    <input class="form-control" type="date" id="birthDate" formControlName="birthDate" />
+                </div>
+                <button class="btn btn-primary saveProfile float-right" type="submit">Save data</button>
+            </form>
+        </div>
+    </div>
+</div>

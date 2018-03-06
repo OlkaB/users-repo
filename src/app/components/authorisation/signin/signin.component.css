@@ -1,0 +1,35 @@
+.wrapper {
+    width: 100%;
+    background: url(http://ak4.picdn.net/shutterstock/videos/11920874/thumb/1.jpg) no-repeat 50% 50%;
+    background-size: cover;
+    height: calc(100vh - 60px);
+    display: flex;
+}
+
+.card {
+    max-width: 400px;
+    width: 100%;
+    padding: 20px 30px 50px;
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, .5);
+}
+
+.card,
+.card img {
+    margin: auto;
+}
+
+.card img {
+    width: 100px;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 25px;
+}
+
+.signUpLink,
+.btn.logIn {
+    margin-top: 20px;
+}
